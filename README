@@ -1,0 +1,16 @@
+-----READMEE----
+    -----Petreaca Vlad-Florin 336CB----
+
+
+-initial, mi-am declarat structura sigaction pentru seta fcuntia de handler si sa setez flagul pentru a folosi
+functia de handler.Am setat si bitul pe maska pentru semnalul SIGSEGV
+
+-dupa care am inceput sa implementez functia de tratare a semnalului:
+    -verific ca functia primeste doar SIGSEGV
+    -iau adresa la care se produce seg fault-ul
+    -iterez prin segmente sa vad in care din ele se afla aceasta adresa
+    -cand o gasesc intr-un segment, calculez numarul total de pagini si indexul paginii unde am gasit semnalul
+    -in data asignez un vector de int-uri, de dimensiunea numarului total de pagini(este un vector de flag-uri
+pentru a reprezenta paginile mapate. O pagina este mapata daca are flag-ul 1)
+    -daca o pagina este deja mapata, semnalul este tratat default
+    -daca nu, verific daca pagina este doar partial in file_size. In acest caz, fac o mapare anonima cu 0
